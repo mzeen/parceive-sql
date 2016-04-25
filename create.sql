@@ -31,12 +31,11 @@ CREATE TABLE Function(
   Id INTEGER PRIMARY KEY NOT NULL,
   Name VARCHAR,
   Prototype VARCHAR,
+  Type INTEGER,
   File INTEGER,
   Line INTEGER,
-  Column INTEGER,
-  Type INTEGER,
   FOREIGN KEY(File) REFERENCES File(Id),
-  CONSTRAINT UniqueFunction UNIQUE (Name, Prototype, File, Line, Column)
+  CONSTRAINT UniqueFunction UNIQUE (Name, Prototype, File, Line)
 );
 
 CREATE TABLE Image (
@@ -49,7 +48,6 @@ CREATE TABLE Instruction(
   Segment INTEGER,
   Type INTEGER,
   Line INTEGER,
-  Column INTEGER,
   FOREIGN KEY(Segment) REFERENCES Segment(Id)
 );
 
@@ -63,10 +61,7 @@ CREATE TABLE InstructionTagInstance(
 
 CREATE TABLE Loop(
   Id INTEGER PRIMARY KEY NOT NULL,
-  Function INTEGER,
-  Line INTEGER,
-  Column INTEGER,
-  FOREIGN KEY(Function) REFERENCES Function(Id)
+  Line INTEGER
 );
 
 CREATE TABLE LoopExecution(
