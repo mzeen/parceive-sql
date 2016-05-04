@@ -5,7 +5,10 @@ CREATE TABLE Access(
   Reference INTEGER,
   Type INTEGER,
   State INTEGER,
-  FOREIGN KEY(Reference) REFERENCES Reference(Id)
+  Address INTEGER,
+  Size INTEGER,
+  FOREIGN KEY(Reference) REFERENCES Reference(Id),
+  FOREIGN KEY(Instruction) REFERENCES Instruction(Id)
 );
 
 CREATE TABLE Call(
