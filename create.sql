@@ -23,6 +23,18 @@ CREATE TABLE Call(
   FOREIGN KEY(Instruction) REFERENCES Instruction(Id)
 );
 
+CREATE TABLE Conflict(
+  Id INTEGER PRIMARY KEY NOT NULL,
+  TagInstance1 INTEGER,
+  TagInstance2 INTEGER,
+  Access1 INTEGER,
+  Access2 INTEGER,
+  FOREIGN KEY(TagInstance1) REFERENCES TagInstance(Id),
+  FOREIGN KEY(TagInstance2) REFERENCES TagInstance(Id),
+  FOREIGN KEY(Access1) REFERENCES Access(Id),
+  FOREIGN KEY(Access2) REFERENCES Access(Id)
+);
+
 CREATE TABLE File(
   Id INTEGER PRIMARY KEY NOT NULL,
   Path VARCHAR,
@@ -95,8 +107,10 @@ CREATE TABLE Reference(
   Type INTEGER,
   Name VARCHAR,
   Allocator INTEGER,
+  Deallocator INTEGER,
   Member INTEGER,
   FOREIGN KEY(Allocator) REFERENCES Instruction(Id),
+  FOREIGN KEY(Deallocator) REFERENCES Instruction(Id),
   FOREIGN KEY(Member) REFERENCES Member(Id)
 );
 
@@ -163,6 +177,7 @@ CREATE TABLE Thread(
   StartTime VARCHAR,
   EndTSC INTEGER,
   EndTime VARCHAR,
+  Parent INTEGER,
   FOREIGN KEY(CreateInstruction) REFERENCES Instruction(Id),
   FOREIGN KEY(JoinInstruction) REFERENCES Instruction(Id)
 );
