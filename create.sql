@@ -171,6 +171,7 @@ CREATE TABLE TagInstruction(
 
 CREATE TABLE Thread(
   Id INTEGER PRIMARY KEY NOT NULL,
+  Call INTEGER,
   CreateInstruction INTEGER,
   JoinInstruction INTEGER,
   Process INTEGER,
@@ -178,6 +179,7 @@ CREATE TABLE Thread(
   EndTSC INTEGER,
   EndTime VARCHAR,
   Parent INTEGER,
+  FOREIGN KEY(Call) REFERENCES Call(Id),
   FOREIGN KEY(CreateInstruction) REFERENCES Instruction(Id),
   FOREIGN KEY(JoinInstruction) REFERENCES Instruction(Id)
 );
