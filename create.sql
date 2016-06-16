@@ -23,6 +23,14 @@ CREATE TABLE Call(
   FOREIGN KEY(Instruction) REFERENCES Instruction(Id)
 );
 
+CREATE TABLE CallTagInstance(
+  Id INTEGER PRIMARY KEY NOT NULL,
+  Call INTEGER,
+  TagInstance INTEGER,
+  FOREIGN KEY(Call) REFERENCES Call(Id),
+  FOREIGN KEY(TagInstance) REFERENCES TagInstance(Id)
+);
+
 CREATE TABLE Conflict(
   Id INTEGER PRIMARY KEY NOT NULL,
   TagInstance1 INTEGER,
@@ -69,9 +77,9 @@ CREATE TABLE Instruction(
 CREATE TABLE InstructionTagInstance(
   Id INTEGER PRIMARY KEY NOT NULL,
   Instruction INTEGER,
-  Tag INTEGER,
+  TagInstance INTEGER,
   FOREIGN KEY(Instruction) REFERENCES Instruction(Id),
-  FOREIGN KEY(Tag) REFERENCES Tag(Id)
+  FOREIGN KEY(TagInstance) REFERENCES TagInstance(Id)
 );
 
 CREATE TABLE Loop(
